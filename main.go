@@ -18,10 +18,9 @@ func main() {
 	// Middleware
 	app.Use(recover.New())
 	app.Use(logger.New())
-	// app.Get("/dashboard", monitor.New())
 
 	app.Use("/ws", func(c *fiber.Ctx) error {
-		// Source: Fiber Documentation
+		// Source: Fiber Documentatie
 		// Kijk of de HTTP request de `Upgrade: websocket` headers heeft.
 		// Voeg de API_KEY en USERNAME headers toe aan Locals.
 		if websocket.IsWebSocketUpgrade(c) {
