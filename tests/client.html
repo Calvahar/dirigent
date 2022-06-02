@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>WebSocket Client - Testing</title>
+  </head>
+  <body></body>
+
+  <script>
+    let api_key = "abc";
+    let socket = new WebSocket(`ws://127.0.0.1:3000/ws/1`);
+
+    socket.onmessage = (e) => {
+      console.log(e.data);
+    };
+  </script>
+</html>
