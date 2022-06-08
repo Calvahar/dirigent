@@ -1,4 +1,4 @@
-# Proftaak - Dirigent Server - Versie 1.0.0
+# Proftaak - Dirigent Server - Versie 1.1.0
 
 De Dirigent server is verantwoordelijk voor het aansturen van diverse clients. Iedere client die verbinding maakt met de Dirigent server - met de juiste WebSocket upgrade headers -, wordt in een pool gezet en krijgt vervolgens commando's toegestuurd via een WebSocket verbinding.
 
@@ -30,6 +30,14 @@ go run main.go && go run colors.go
 ```
 Terminal output: 
 ![Terminal Output](https://github.com/Proftaak-Semester-2/dirigent/blob/main/assets/test_output.png?raw=true)
+
+### Configuratie
+In de root staat een `.env` bestand. Hierin kunnen een aantal instellingen ingesteld worden.
+
+```shell
+# Server
+SERVER_PORT=3000
+```
 
 ## Test uitvoeren
 

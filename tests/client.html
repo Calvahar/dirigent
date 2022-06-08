@@ -2,14 +2,45 @@
   <head>
     <title>WebSocket Client - Testing</title>
   </head>
-  <body></body>
+  <body>
+    <div id="box">
+      <div id="container">
+        <p id="Num">1</p>
+      </div>
+    </div>
+  </body>
 
   <script>
     let api_key = "abc";
-    let socket = new WebSocket(`ws://127.0.0.1:3000/ws/1`);
+    let socket = new WebSocket(`ws://127.0.0.1:3000/connect`);
 
     socket.onmessage = (e) => {
-      console.log(e.data);
+      const data = JSON.parse(e.data);
+      document.getElementsByTagName("body")[0].style.backgroundColor = data["Color"];
+      document.getElementById("Num").textContent = data["UserId"];
     };
   </script>
+
+  <style>
+    #box {
+      font-family: arial;
+      font-size: 40px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #container {
+      width: 150px;
+      height: 150px;
+      background-color: #ffffff65;
+      border: 3px solid black;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 </html>
