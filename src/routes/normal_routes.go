@@ -1,33 +1,42 @@
 package routes
 
 import (
-	"time"
+	"fmt"
+	"log"
+	"os"
 
-	"github.com/Proftaak-Semester-2/dirigent/src/controllers"
 	"github.com/Proftaak-Semester-2/dirigent/src/middleware"
 	ws "github.com/antoniodipinto/ikisocket"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/websocket/v2"
 )
 
 func NormalRoutes(a *fiber.App) {
-	a.Static("/piano", "./static/piano")
+	path, _ := os.Getwd()
+	a.Static("/play", fmt.Sprintf("%s\\static\\piano", path))
 
-	a.Get("/piano", controllers.Piano)
+	a.Static("/piano", fmt.Sprintf("%s\\static\\client", path))
 
-	a.Get("/connect", middleware.WSMiddleware, ws.New(func(kws *ws.Websocket) {
+	a.Get("/middleman", middleware.WSMiddleware, ws.New(func(kws *ws.Websocket) {
 
 		clients[kws.UUID] = kws.UUID
 
 		kws.SetAttribute("user_id", kws.UUID)
 	}))
 
-	go func() {
+	a.Get("/broadcaster", middleware.WSMiddleware, websocket.New(func(c *websocket.Conn) {
+		var (
+			msg []byte
+			err error
+		)
+
 		for {
-			color := controllers.GenerateColor()
-			time.Sleep(1 * time.Second)
+			if _, msg, err = c.ReadMessage(); err != nil {
+				log.Println(err)
+				break
+			}
 
-			ws.Broadcast([]byte(string(color)))
-
+			ws.Broadcast(msg)
 		}
-	}()
+	}))
 }
