@@ -52,33 +52,38 @@ function listenToWS(socket) {
   socket.onmessage = (e) => {
     const { Key: _key, Color: _color, Frequency: _freq } = JSON.parse(e.data);
 
-    document.getElementsByTagName("body")[0].style.backgroundColor = _color;
-    document.getElementsByTagName("body")[0].style.backgroundColor = "white";
+    const body = document.getElementsByTagName("body")[0].style;
+    body.transitionDuration = "0.1s";
+    body.backgroundColor = _color;
+    setTimeout(() => {
+      body.transitionDuration = "1.2s";
+      body.backgroundColor = "white";
+    }, 100);
 
     playNote(_key, _freq);
   };
 
   const NotesToPlay = new Map();
 
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  const osc = audioContext.createOscillator();
+  const noteGainNode = audioContext.createGain();
+  noteGainNode.connect(audioContext.destination);
+
+  noteGainNode.gain.value = 0.00001;
+  const setAttack = () =>
+    noteGainNode.gain.exponentialRampToValueAtTime(0.5, audioContext.currentTime + 0.01);
+  const setDecay = () =>
+    noteGainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
+  const setRelease = () =>
+    noteGainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 2);
+
   /**
    * Speel een toon af met behulp van de Audio API
    * @param {string} note
    */
   function playNote(key, frequency) {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-    const osc = audioContext.createOscillator();
-    const noteGainNode = audioContext.createGain();
-    noteGainNode.connect(audioContext.destination);
-
-    noteGainNode.gain.value = 0.00001;
-    const setAttack = () =>
-      noteGainNode.gain.exponentialRampToValueAtTime(0.5, audioContext.currentTime + 0.01);
-    const setDecay = () =>
-      noteGainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 1);
-    const setRelease = () =>
-      noteGainNode.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 2);
-
     setAttack();
     setDecay();
     setRelease();
