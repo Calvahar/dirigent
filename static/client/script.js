@@ -27,8 +27,8 @@ function listenToWS(socket) {
    * @param {Response} e
    */
   socket.onopen = () => {
-    switchButton.innerHTML = "Verbonden!<br><br>Verbreek verbinding";
-    switchButton.style.backgroundColor = "green";
+    switchButton.innerHTML = "Je bent nu verbonden!";
+    switchButton.style.backgroundColor = "#2ecc71";
     switchButton.onclick = () => {
       DisconnectFromWS(socket);
     };
@@ -41,8 +41,8 @@ function listenToWS(socket) {
     switchButton.onclick = () => {
       ConnectToWS();
     };
-    switchButton.innerHTML = "Maak opnieuw verbinding.";
-    switchButton.style.backgroundColor = "gray";
+    switchButton.innerHTML = "Klik om opnieuw verbinding te maken.";
+    switchButton.style.backgroundColor = "#ecf0f1";
   };
 
   /**

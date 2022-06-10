@@ -13,6 +13,16 @@ function hideOverlayAndConnectToWS() {
   document.getElementById("overlay").style.visibility = "hidden";
 
   socket = new WebSocket("ws://localhost:3000/broadcaster");
+
+  socket.onclose = (e) => {
+    document.getElementById("overlay").style.visibility = "visible";
+    document.getElementById("overlay-text").innerText =
+      "Verbinding verloren.<br>Klik opnieuw om weer verbinding te maken.";
+
+    window.addEventListener("click", () => {
+      hideOverlayAndConnectToWS();
+    });
+  };
 }
 
 function start() {
