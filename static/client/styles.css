@@ -1,0 +1,19 @@
+#container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: auto;
+  padding: 10px;
+  font-size: large;
+  border: 0.1px solid gray;
+  border-radius: 5px;
+}
