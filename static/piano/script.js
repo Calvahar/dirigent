@@ -99,7 +99,7 @@ function start() {
 
     const freq = getHz(keys[key].note, (keys[key].octaveOffset || 0) + 3);
 
-    socket.send(JSON.stringify({ Key: key, Frequency: freq, color: keys[key].color }));
+    socket.send(JSON.stringify({ Key: key, Frequency: freq, Color: keys[key].color }));
 
     keys[key].element.classList.add("pressed");
     pressedNotes.set(key, "exists");

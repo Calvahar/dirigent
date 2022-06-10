@@ -26,7 +26,7 @@ function listenToWS(socket) {
    * Functie wordt uitgevoerd zodra er succesvol een WebSocket verbinding geopend is.
    * @param {Response} e
    */
-  socket.onopen = (e) => {
+  socket.onopen = () => {
     switchButton.innerHTML = "Verbonden!<br><br>Verbreek verbinding";
     switchButton.style.backgroundColor = "green";
     switchButton.onclick = () => {
@@ -51,8 +51,7 @@ function listenToWS(socket) {
    * @param {Response} e
    */
   socket.onmessage = (e) => {
-    console.log(e.data);
-    const { "KEY": _key, "BG-COLOR": _color, "Frequency": _freq } = JSON.parse(e.data);
+    const { Key: _key, Color: _color, Frequency: _freq } = JSON.parse(e.data);
 
     document.getElementsByTagName("body")[0].style.backgroundColor = _color;
 
