@@ -10,10 +10,14 @@ import (
 )
 
 func NormalRoutes(a *fiber.App) {
-	path, _ := os.Getwd()
-	a.Static("/play", fmt.Sprintf("%s\\static\\piano", path))
+	a.Get("/", func(c *fiber.Ctx) error {
+		return c.Redirect("dirigent.hanskazan.space/piano")
+	})
 
-	a.Static("/piano", fmt.Sprintf("%s\\static\\client", path))
+	path, _ := os.Getwd()
+	a.Static("/piano", fmt.Sprintf("%s\\static\\piano", path))
+
+	a.Static("/connect", fmt.Sprintf("%s\\static\\client", path))
 
 	a.Get("/middleman", middleware.WSMiddleware, ws.New(func(kws *ws.Websocket) {
 		clients[kws.UUID] = kws.UUID
