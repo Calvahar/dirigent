@@ -23,10 +23,10 @@ function hideOverlayAndConnectToWS() {
     document.getElementById("overlay").style.visibility = "visible";
     document.getElementById("overlay-text").innerHTML = `Verbinding verloren${
       closeMessage ? " omdat iemand de piano al aan het gebruiken is!" : "."
-    }.<br>Klik opnieuw om weer verbinding te maken.`;
+    }<br>Klik om de pagina te herladen.`;
 
     window.addEventListener("click", () => {
-      hideOverlayAndConnectToWS();
+      window.location.reload();
     });
   };
 }

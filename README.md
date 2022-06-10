@@ -1,4 +1,4 @@
-# Proftaak - Dirigent Server - Versie 1.1.4
+# Proftaak - Dirigent Server - Versie 1.1.5
 
 De Dirigent server is verantwoordelijk voor het aansturen van diverse clients. Iedere client die verbinding maakt met de Dirigent server - met de juiste WebSocket upgrade headers -, wordt in een pool gezet en krijgt vervolgens commando's toegestuurd via een WebSocket verbinding.
 
