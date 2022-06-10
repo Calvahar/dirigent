@@ -8,6 +8,7 @@ import (
 )
 
 var clients = make(map[string]string)
+var pianoPlayer = make(map[string]string)
 
 func Listeners() {
 
@@ -24,6 +25,7 @@ func Listeners() {
 	ws.On(ws.EventDisconnect, func(ep *ws.EventPayload) {
 		// Client wordt uit de lijst van verbonden clients gehaald
 		delete(clients, ep.Kws.GetStringAttribute("user_id"))
+		delete(pianoPlayer, ep.Kws.GetStringAttribute("user_id"))
 
 		if config.Disconnect {
 			fmt.Printf("[Disconnect] - User: %s \n", ep.Kws.GetStringAttribute("user_id"))
@@ -34,6 +36,12 @@ func Listeners() {
 	ws.On(ws.EventError, func(ep *ws.EventPayload) {
 		if config.Error {
 			fmt.Printf("[Error] - User: %s \n", ep.Kws.GetStringAttribute("user_id"))
+		}
+	})
+
+	ws.On(ws.EventMessage, func(ep *ws.EventPayload) {
+		if len(pianoPlayer[ep.Kws.GetStringAttribute("user_id")]) > 0 {
+			ws.Broadcast(ep.Data)
 		}
 	})
 }
