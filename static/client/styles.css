@@ -22,25 +22,6 @@ button {
 }
 
 .fading {
-  -webkit-animation-duration: 2s;
-  -webkit-animation-name: fading;
-  animation-duration: 2s;
-  animation-name: fading;
-}
-
-@-webkit-keyframes fading {
-  from {
-    color: --color;
-  }
-  to {
-    color: white;
-  }
-}
-@keyframes fading {
-  from {
-    color: --color;
-  }
-  to {
-    color: white;
-  }
+  transition: background-color 2s cubic-bezier(1, 1, 1, 1);
+  transition-delay: 0s;
 }

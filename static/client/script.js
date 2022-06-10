@@ -53,7 +53,7 @@ function listenToWS(socket) {
     const { Key: _key, Color: _color, Frequency: _freq } = JSON.parse(e.data);
 
     document.getElementsByTagName("body")[0].style.backgroundColor = _color;
-    document.documentElement.style.setProperty("--color", _color);
+    document.getElementsByTagName("body")[0].style.backgroundColor = "white";
 
     playNote(_key, _freq);
   };
