@@ -19,23 +19,23 @@ function start() {
   const getElementByNote = (note) => note && document.querySelector(`[note="${note}"]`);
 
   const keys = {
-    A: { element: getElementByNote("C"), note: "C", octaveOffset: 0 },
-    W: { element: getElementByNote("C#"), note: "C#", octaveOffset: 0 },
-    S: { element: getElementByNote("D"), note: "D", octaveOffset: 0 },
-    E: { element: getElementByNote("D#"), note: "D#", octaveOffset: 0 },
-    D: { element: getElementByNote("E"), note: "E", octaveOffset: 0 },
-    F: { element: getElementByNote("F"), note: "F", octaveOffset: 0 },
-    T: { element: getElementByNote("F#"), note: "F#", octaveOffset: 0 },
-    G: { element: getElementByNote("G"), note: "G", octaveOffset: 0 },
-    Y: { element: getElementByNote("G#"), note: "G#", octaveOffset: 0 },
-    H: { element: getElementByNote("A"), note: "A", octaveOffset: 1 },
-    U: { element: getElementByNote("A#"), note: "A#", octaveOffset: 1 },
-    J: { element: getElementByNote("B"), note: "B", octaveOffset: 1 },
-    K: { element: getElementByNote("C2"), note: "C", octaveOffset: 1 },
-    O: { element: getElementByNote("C#2"), note: "C#", octaveOffset: 1 },
-    L: { element: getElementByNote("D2"), note: "D", octaveOffset: 1 },
-    P: { element: getElementByNote("D#2"), note: "D#", octaveOffset: 1 },
-    semicolon: { element: getElementByNote("E2"), note: "E", octaveOffset: 1 },
+    A: { element: getElementByNote("C"), note: "C", octaveOffset: 0, color: "#820623" },
+    W: { element: getElementByNote("C#"), note: "C#", octaveOffset: 0, color: "#aa082e" },
+    S: { element: getElementByNote("D"), note: "D", octaveOffset: 0, color: "#f70a0c" },
+    E: { element: getElementByNote("D#"), note: "D#", octaveOffset: 0, color: "#ff5900" },
+    D: { element: getElementByNote("E"), note: "E", octaveOffset: 0, color: "#f65e0c" },
+    F: { element: getElementByNote("F"), note: "F", octaveOffset: 0, color: "#ffc73c" },
+    T: { element: getElementByNote("F#"), note: "F#", octaveOffset: 0, color: "#ddf82f" },
+    G: { element: getElementByNote("G"), note: "G", octaveOffset: 0, color: "#9cdf50" },
+    Y: { element: getElementByNote("G#"), note: "G#", octaveOffset: 0, color: "#87c146" },
+    H: { element: getElementByNote("A"), note: "A", octaveOffset: 1, color: "#609c1c" },
+    U: { element: getElementByNote("A#"), note: "A#", octaveOffset: 1, color: "#11beb3" },
+    J: { element: getElementByNote("B"), note: "B", octaveOffset: 1, color: "#56f0e6" },
+    K: { element: getElementByNote("C2"), note: "C", octaveOffset: 1, color: "#2f80ed" },
+    O: { element: getElementByNote("C#2"), note: "C#", octaveOffset: 1, color: "#1057b7" },
+    L: { element: getElementByNote("D2"), note: "D", octaveOffset: 1, color: "#8000e3" },
+    P: { element: getElementByNote("D#2"), note: "D#", octaveOffset: 1, color: "#ff5ef4" },
+    semicolon: { element: getElementByNote("E2"), note: "E", octaveOffset: 1, color: "#e337d7" },
   };
 
   const getHz = (note = "A", octave = 4) => {
@@ -99,7 +99,7 @@ function start() {
 
     const freq = getHz(keys[key].note, (keys[key].octaveOffset || 0) + 3);
 
-    socket.send(JSON.stringify({ Key: key, Frequency: freq }));
+    socket.send(JSON.stringify({ Key: key, Frequency: freq, color: keys[key].color }));
 
     keys[key].element.classList.add("pressed");
     pressedNotes.set(key, "exists");
