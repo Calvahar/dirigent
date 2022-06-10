@@ -45,7 +45,6 @@ function listenToWS(socket) {
     switchButton.style.backgroundColor = "gray";
   };
 
-  let clickedKey = "";
   /**
    * Functie wordt uitgevoerd wanneer er een message via de WebSocket verbinding binnenkomt.
    * @param {Response} e
@@ -54,6 +53,7 @@ function listenToWS(socket) {
     const { Key: _key, Color: _color, Frequency: _freq } = JSON.parse(e.data);
 
     document.getElementsByTagName("body")[0].style.backgroundColor = _color;
+    document.documentElement.style.setProperty("--color", _color);
 
     playNote(_key, _freq);
   };

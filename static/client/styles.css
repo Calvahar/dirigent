@@ -1,3 +1,7 @@
+:root {
+  --color: "white";
+}
+
 #container {
   height: 100%;
   width: 100%;
@@ -15,4 +19,28 @@ button {
   font-size: large;
   border: 1px solid black;
   border-radius: 20px;
+}
+
+.fading {
+  -webkit-animation-duration: 2s;
+  -webkit-animation-name: fading;
+  animation-duration: 2s;
+  animation-name: fading;
+}
+
+@-webkit-keyframes fading {
+  from {
+    color: --color;
+  }
+  to {
+    color: white;
+  }
+}
+@keyframes fading {
+  from {
+    color: --color;
+  }
+  to {
+    color: white;
+  }
 }
