@@ -27,7 +27,7 @@ func NormalRoutes(a *fiber.App) {
 
 	a.Get("/broadcaster", middleware.WSMiddleware, ws.New(func(kws *ws.Websocket) {
 		if len(pianoPlayer) > 0 {
-			kws.Emit([]byte("Someone is already using the piano!"))
+			kws.Emit([]byte("Iemand is de piano al aan het gebruiken!"))
 			kws.Close()
 		}
 

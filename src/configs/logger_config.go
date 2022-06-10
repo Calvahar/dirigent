@@ -17,5 +17,5 @@ type Config struct {
 }
 
 func LogConfig() Config {
-	return Config{Connect: false, Disconnect: false, Error: true}
+	return Config{Connect: false, Disconnect: false, Error: false}
 }

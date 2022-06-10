@@ -14,10 +14,16 @@ function hideOverlayAndConnectToWS() {
 
   socket = new WebSocket("ws://localhost:3000/broadcaster");
 
+  let closeMessage = false;
+  socket.onmessage = (e) => {
+    if (e.data == "Iemand is de piano al aan het gebruiken!") closeMessage = true;
+  };
+
   socket.onclose = (e) => {
     document.getElementById("overlay").style.visibility = "visible";
-    document.getElementById("overlay-text").innerText =
-      "Verbinding verloren.<br>Klik opnieuw om weer verbinding te maken.";
+    document.getElementById("overlay-text").innerHTML = `Verbinding verloren${
+      closeMessage ? " omdat iemand de piano al aan het gebruiken is!" : "."
+    }.<br>Klik opnieuw om weer verbinding te maken.`;
 
     window.addEventListener("click", () => {
       hideOverlayAndConnectToWS();
