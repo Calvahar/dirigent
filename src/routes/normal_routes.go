@@ -3,7 +3,9 @@ package routes
 import (
 	"fmt"
 	"os"
+	"time"
 
+	"github.com/Proftaak-Semester-2/dirigent/src/controllers"
 	"github.com/Proftaak-Semester-2/dirigent/src/middleware"
 	ws "github.com/antoniodipinto/ikisocket"
 	"github.com/gofiber/fiber/v2"
@@ -17,8 +19,10 @@ func NormalRoutes(a *fiber.App) {
 
 	// Statische routes die de bestanden uit de absolute paden /static/piano en /static/client serven
 	path, _ := os.Getwd()
-	a.Static("/piano", fmt.Sprintf("%s\\static\\piano", path))
-	a.Static("/connect", fmt.Sprintf("%s\\static\\client", path))
+
+	a.Static("/piano", fmt.Sprintf("%s/static/piano", path))
+	a.Static("/connect", fmt.Sprintf("%s/static/client", path))
+	a.Static("/demo", fmt.Sprintf("%s/static/demo", path))
 
 	// De middleman endpoint gebruikt de WebSocket middleware en de ikisocket package
 	/* De client verbindt met /middleman, waarna de client wordt toegevoegd in een array
@@ -43,5 +47,12 @@ func NormalRoutes(a *fiber.App) {
 
 		pianoPlayer[kws.UUID] = kws.UUID
 		kws.SetAttribute("user_id", kws.UUID)
+	}))
+
+	a.Get("/demo", middleware.WSMiddleware, ws.New(func(kws *ws.Websocket) {
+		for {
+			kws.Emit([]byte(controllers.GenerateColor()))
+			time.Sleep(2 * time.Second)
+		}
 	}))
 }
