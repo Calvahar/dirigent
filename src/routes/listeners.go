@@ -7,11 +7,13 @@ import (
 	ws "github.com/antoniodipinto/ikisocket"
 )
 
+// Object van type <map> om verbindingen in op te slaan
 var clients = make(map[string]string)
 var pianoPlayer = make(map[string]string)
 
+// Verschillende listeneres die werken op de ikisocket WebSocket.
 func Listeners() {
-
+	// Laadt de config en slaat het op in de config variabele
 	config := configs.LogConfig()
 
 	// Client maakt verbinding met WebSocket
@@ -27,6 +29,7 @@ func Listeners() {
 		delete(clients, ep.Kws.GetStringAttribute("user_id"))
 		delete(pianoPlayer, ep.Kws.GetStringAttribute("user_id"))
 
+		// Als Disconnect in de config true is:
 		if config.Disconnect {
 			fmt.Printf("[Disconnect] - User: %s \n", ep.Kws.GetStringAttribute("user_id"))
 		}
@@ -34,6 +37,7 @@ func Listeners() {
 
 	// Client's verbinding krijgt een error
 	ws.On(ws.EventError, func(ep *ws.EventPayload) {
+		// Als Error in de config true is:
 		if config.Error {
 			fmt.Printf("[Error] - User: %s \n", ep.Kws.GetStringAttribute("user_id"))
 		}

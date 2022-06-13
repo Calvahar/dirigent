@@ -4,8 +4,8 @@ import (
 	"math/rand"
 )
 
+// Genereer een willekeurige kleur uit de string array en return deze
 func GenerateColor() string {
-
 	colorOptions := []string{
 		"#2ecc71",
 		"#3498db",

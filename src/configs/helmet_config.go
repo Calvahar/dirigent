@@ -7,5 +7,6 @@ import (
 func HelmetConfig() helmet.Config {
 
 	// Return de config die gebruikt kan worden in ./middleware/fiber_middleware.go
+	// Deze is nu leeg.
 	return helmet.Config{}
 }
