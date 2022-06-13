@@ -7,6 +7,7 @@ import (
 func LoggerConfig() logger.Config {
 
 	// Return de config die gebruikt kan worden in ./middleware/fiber_middleware.go
+	// Deze is nu leeg.
 	return logger.Config{}
 }
 

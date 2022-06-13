@@ -9,6 +9,7 @@ import (
 )
 
 func FiberMiddleware(a *fiber.App) {
+	// Laadt de config en slaat ze op in een variabele
 	lConfig := configs.LoggerConfig()
 	hConfig := configs.HelmetConfig()
 
@@ -24,11 +25,11 @@ func FiberMiddleware(a *fiber.App) {
 
 // Middleware die gebruikt kan worden voor endpoints die als WebSocket moeten werken.
 func WSMiddleware(c *fiber.Ctx) error {
-	// Als het request WebSocket Headers hefet, mag het door naar de volgende endpoint
+	// Als het request WebSocket Headers heeft, mag het door naar de volgende endpoint...
 	if websocket.IsWebSocketUpgrade(c) {
 		return c.Next()
 	}
-	// Anders returnt een 426, Upgrade Required
-	// Dit is in JSON, zodat het voor de IoT apparaten makkelijker te lezen is dan een HTML-pagina
+	// ...anders returnt een 426: Upgrade Required
+	// Dit is in JSON, zodat het voor de clients makkelijker te lezen is dan een HTML-pagina
 	return fiber.ErrUpgradeRequired
 }

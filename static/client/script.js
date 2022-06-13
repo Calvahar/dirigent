@@ -69,7 +69,8 @@ function listenToWS(socket) {
 
   /**
    * Speel een toon af met behulp van de Audio API
-   * @param {string} note
+   * @param {string} key
+   * @param {string} frequency
    */
   function playNote(key, frequency) {
     const osc = audioContext.createOscillator();
