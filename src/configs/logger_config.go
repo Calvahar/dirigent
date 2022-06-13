@@ -1,6 +1,9 @@
 package configs
 
 import (
+	"os"
+	"strconv"
+
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
@@ -18,5 +21,9 @@ type Config struct {
 }
 
 func LogConfig() Config {
-	return Config{Connect: false, Disconnect: false, Error: false}
+	Connect, _ := strconv.ParseBool(os.Getenv("CONNECT"))
+	Disconnect, _ := strconv.ParseBool(os.Getenv("DISCONNECT"))
+	Error, _ := strconv.ParseBool(os.Getenv("ERROR"))
+
+	return Config{Connect, Disconnect, Error}
 }
