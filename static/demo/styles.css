@@ -1,0 +1,24 @@
+body {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  background-color: #ffffffab;
+  min-width: 300px;
+  border: 2px solid black;
+  border-radius: 8px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px 0 15px;
+}
+
+#displayState,
+noscript {
+  font-size: larger;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
